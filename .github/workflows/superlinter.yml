@@ -9,10 +9,13 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+        with:
+          # Super-Linter needs full git history to accurately diff changes
+          fetch-depth: 0
 
       - name: Run Super-Linter
-        uses: github/super-linter@v3
+        uses: super-linter/super-linter@v7
         env:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
