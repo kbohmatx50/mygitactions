@@ -1,21 +1,21 @@
 
-name: Print Repository Information
+# name: Print Repository Information
 
-on:
-  workflow_dispatch:
-  push:
+# on:
+#   workflow_dispatch:
+#   push:
 
-jobs:
-  print-info:
-    runs-on: ubuntu-latest
+# jobs:
+#   print-info:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Print Repository Information
-        run: |
-          echo "Repository Name: $GITHUB_REPOSITORY"
-          echo "Branch Name: $GITHUB_REF_NAME"
-          echo "Current Date: $(date +'%Y-%m-%d')"
-          echo "Commit SHA: $GITHUB_SHA"
-      - name: Print .NET Version
-        run: |
-          dotnet --version
+#     steps:
+#       - name: Print Repository Information
+#         run: |
+#           echo "Repository Name: $GITHUB_REPOSITORY"
+#           echo "Branch Name: $GITHUB_REF_NAME"
+#           echo "Current Date: $(date +'%Y-%m-%d')"
+#           echo "Commit SHA: $GITHUB_SHA"
+#       - name: Print .NET Version
+#         run: |
+#           dotnet --version
