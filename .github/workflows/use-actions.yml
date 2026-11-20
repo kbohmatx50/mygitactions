@@ -1,4 +1,5 @@
-name: Actions Workflow
+
+name: HelloWorld Build and Test
 
 on:
   push:
@@ -7,10 +8,28 @@ on:
   workflow_dispatch:
 
 jobs:
-  job_name:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: windows-latest
+
     steps:
-      - name: Checkout code
+      # 1. Download repository
+      - name: Checkout Repository
         uses: actions/checkout@v4
-      - name: List files
-        run: ls -la
+
+      # 2. Install .NET 8
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      # 3. Restore dependencies
+      - name: Restore Dependencies
+        run: dotnet restore HelloWorld.Tests/HelloWorld.Tests.csproj
+
+      # 4. Build application and tests
+      - name: Build Application
+        run: dotnet build HelloWorld.Tests/HelloWorld.Tests.csproj --configuration Release --no-restore
+
+      # 5. Execute unit tests
+      - name: Run Unit Tests
+        run: dotnet test HelloWorld.Tests/HelloWorld.Tests.csproj --configuration Release --no-build --no-restore

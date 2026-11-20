@@ -1,5 +1,6 @@
 
-Console.WriteLine("Hello World!");
+using HelloWorld;
 
-Console.WriteLine("Running .NET 8 GitHub Actions Build!");
+Greeting greeting = new Greeting();
 
+Console.WriteLine(greeting.GetMessage());
