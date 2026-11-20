@@ -15,3 +15,7 @@ jobs:
           echo "Repository Name: $GITHUB_REPOSITORY"
           echo "Branch Name: $GITHUB_REF_NAME"
           echo "Current Date: $(date +'%Y-%m-%d')"
+          echo "Commit SHA: $GITHUB_SHA"
+      - name: Print .NET Version
+        run: |
+          dotnet --version
