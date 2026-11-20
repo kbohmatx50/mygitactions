@@ -1,0 +1,20 @@
+
+name: Multi-Trigger Workflow
+
+on:
+  push:
+  pull_request:
+    types: [opened]
+  workflow_dispatch:
+
+jobs:
+  print-info:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print Trigger Information
+        run: |
+          echo "Repository Name: $GITHUB_REPOSITORY"
+          echo "Branch Name: $GITHUB_REF_NAME"
+          echo "Current Date: $(date +'%Y-%m-%d')"
+          echo "Event Name: $GITHUB_EVENT_NAME"
