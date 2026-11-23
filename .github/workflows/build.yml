@@ -5,11 +5,25 @@ on:
   push:
   workflow_dispatch:
 
+env:
+  APP_NAME: ArtifactDemo
+  BUILD_CONFIGURATION: Release
+  APP_ENVIRONMENT: Development
+
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
+      - name: Display GitHub variable
+        run: |
+          echo "Application: $env:APP_NAME"
+          echo "Configuration: $env:BUILD_CONFIGURATION"
+          echo "Environment: $env:APP_ENVIRONMENT"
+
+        env: 
+          APP_ENVIRONMENT: ${{ env.APP_ENVIRONMENT }}
+
       - name: Checkout source
         uses: actions/checkout@v4
 
@@ -22,10 +36,10 @@ jobs:
         run: dotnet restore HelloWorld/HelloWorld.csproj
 
       - name: Build application
-        run: dotnet build HelloWorld/HelloWorld.csproj --configuration Release --no-restore
+        run: dotnet build HelloWorld/HelloWorld.csproj --configuration $env:BUILD_CONFIGURATION --no-restore
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
           name: build-output
-          path: HelloWorld/bin/Release/
+          path: HelloWorld/bin/$env:BUILD_CONFIGURATION/
