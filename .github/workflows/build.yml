@@ -8,12 +8,21 @@ env:
   APP_NAME: ArtifactDemo
   BUILD_CONFIGURATION: Release
   APP_ENVIRONMENT: ${{ vars.APP_ENVIRONMENT }}
+  API_KEY: ${{ secrets.DEMO_API_KEY }}
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
+      - name: Display API key
+        run: |
+          if ([string]::IsNullOrEmpty($env:API_KEY)) {
+            throw "Missing API key"
+          }
+
+          Write-Host "API key successfully loaded"
+
       - name: Display GitHub variable
         run: |
           echo "Application: $env:APP_NAME"
